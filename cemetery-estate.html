@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Rest Estate Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a2e1a;
+            --primary-green: #4a6741;
+            --accent-gold: #b8976d;
+            --soft-cream: #f5f2ed;
+            --text-dark: #2c3e2c;
+            --text-light: #6b7c6b;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            background: var(--soft-cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .bookButton{
+            text-decoration: none;
+            color: black;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            background-color:#DAA520;
+            padding: 15px 32px;
+        }
+        
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-green) 100%);
+            color: var(--soft-cream);
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(184, 151, 109, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 103, 65, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--accent-gold);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .gallery-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 5rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+
+        .gallery-item:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .gallery-item:nth-child(even) .image-container {
+            order: 2;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(26, 46, 26, 0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .image-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(26, 46, 26, 0.25);
+        }
+
+        .image-container::before {
+            content: '';
+            display: block;
+            padding-top: 66.67%; /* 3:2 aspect ratio */
+        }
+
+        .placeholder-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--soft-cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .description-container {
+            padding: 2rem;
+        }
+
+        .description-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .description-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .description-text {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            min-height: 100px;
+            font-style: italic;
+            padding: 1rem;
+            border-left: 2px solid var(--accent-gold);
+            background: rgba(184, 151, 109, 0.05);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--primary-dark);
+            color: var(--soft-cream);
+            padding: 5rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .contact-subtitle {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(184, 151, 109, 0.3);
+            background: rgba(245, 242, 237, 0.05);
+            color: var(--soft-cream);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            border-radius: 2px;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: rgba(245, 242, 237, 0.1);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(245, 242, 237, 0.4);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #c9a77d;
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(184, 151, 109, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-detail {
+            text-align: center;
+        }
+
+        .contact-detail-label {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .contact-detail-value {
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--soft-cream);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .gallery-item,
+            .gallery-item:nth-child(even) {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .gallery-item:nth-child(even) .image-container {
+                order: 1;
+            }
+
+            .description-container {
+                padding: 1rem;
+            }
+
+            .description-number {
+                font-size: 2rem;
+            }
+
+            .description-title {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem 3rem;
+            }
+
+            .contact-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .contact-title {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <a href = 'https://forms.gle/7ZTnfAYrgfFhTBuT9' class= "bookButton">Book a tripping now!</a>
+            <h1>Manila Memorial Park</h1>
+            <p class="subtitle">Dignified Final Resting Places</p>
+            <p class="tagline">
+                Helping families find peace and serenity in thoughtfully chosen memorial locations. 
+                With compassion and expertise, we guide you through every step of this important decision.
+            </p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <!-- Property 1 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="8_Lots_Double_Niche.png" alt="8 Lots Double Niche" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">8 Lots – Double Niche</h3>
+                <p class="description-text">
+                    Eight (8) double niche memorial lots are designed for the placement of cremated remains. Each double niche accommodates two urns within a shared memorial space, allowing companions or family members to be interred together. The niches are typically enclosed with a secure, front-facing panel suitable for personalized inscriptions, nameplates, or memorial plaques. These lots provide a dignified, space-efficient, and low-maintenance option for permanent remembrance within a columbarium or memorial structure.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 2 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Lawn_Lot.png" alt="Lawn Lot" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Lawn Lot</h3>
+                <p class="description-text">
+                    A lawn lot memorial is a ground burial space situated within a landscaped lawn setting, offering a serene and dignified place of remembrance. The lot accommodates the interment of a casket and is typically marked with a flat or upright memorial marker in accordance with cemetery guidelines. Lawn lots provide a traditional burial option within a well-maintained, park-like environment designed for lasting tribute and visitation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 3 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Modern_style_Mausoleum.png" alt="Modern Style Mausoleum" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Modern Style Mausoleum</h3>
+                <p class="description-text">
+                    A modern style mausoleum is an above-ground interment structure featuring clean lines, contemporary design, and durable materials such as granite or marble. It provides secure entombment with personalized crypt or niche panels, offering a dignified and lasting place of remembrance.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 4 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Manila_Memorial_Sta__Rosa.png" alt="Manila Memorial Park Sta. Rosa" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Manila Memorial Park - Sta. Rosa</h3>
+                <p class="description-text">
+                    Manila Memorial Park in Sta. Rosa offers beautifully landscaped memorial grounds with a peaceful ambiance. Featuring pristine lawns, elegant architectural elements, and serene water features, this location provides families with a dignified and tranquil final resting place in a modern memorial park setting.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 5 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Manila_Memorial_Park_-_Sucat.png" alt="Manila Memorial Park Sucat" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Manila Memorial Park - Sucat</h3>
+                <p class="description-text">
+                    Located in Sucat, Manila Memorial Park is one of the most prestigious memorial parks in the Philippines. Offering memorial lots, columbary niches, and cremation services, this beautifully maintained facility features the Rizal Premier Chapel and provides families with a respectful, accessible location for remembrance and memorial services.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 6 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Lot_content.png" alt="Memorial Lot Structure" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Memorial Lot Structure</h3>
+                <p class="description-text">
+                    A memorial lot is a designated burial space within a cemetery or memorial park. It provides a permanent location for interment, typically marked with a headstone or plaque, offering a respectful and lasting place for remembrance and visitation. Our lots feature quality construction with vault protection and customizable memorial markers.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 7 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Chapel_Lobby.png" alt="Chapel Lobby" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Chapel Lobby</h3>
+                <p class="description-text">
+                    The Chapel Lobby is a welcoming gathering space located at the entrance of the memorial chapel. It serves as a reception and waiting area for family and guests before and after services, offering a comfortable setting for quiet reflection, condolences, and fellowship in a respectful memorial environment.
+                </p>
+            </div>
+        </div>
+
+        <!-- Property 8 -->
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="Urns.png" alt="Memorial Urns" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="description-container">
+                
+                <h3 class="description-title">Memorial Urns</h3>
+                <p class="description-text">
+                    Urns are containers designed to hold cremated remains, offering a dignified way to preserve and honor a loved one. Available in a variety of materials, styles, and finishes, they can be personalized with inscriptions or decorative elements and may be displayed in a columbarium, mausoleum, or kept at home as a lasting memorial.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <h2 class="contact-title">Get in Touch</h2>
+            <p class="contact-subtitle">We're here to help you find the perfect resting place</p>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+639123456103">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+
+            <div class="contact-info">
+                <div class="contact-detail">
+                    <div class="contact-detail-label">Phone</div>
+                    <div class="contact-detail-value">09542615907</div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-detail-label">Email</div>
+                    <div class="contact-detail-value">info@manila-memorial.com</div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-detail-label">Hours</div>
+                    <div class="contact-detail-value">Mon-Sat: 9AM - 5PM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2020 Eternal Rest Estate Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Form submission handling (customize as needed)
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message. We will contact you shortly.');
+            this.reset();
+        });
+
+        // Smooth scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
