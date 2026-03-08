@@ -525,7 +525,7 @@
             <form class="contact-form" action="https://formsubmit.co/your@email.com" method="POST" />
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="text" id="name" name="fullName" placeholder="Your Name" required>
                 </div>
                 
                 <div class="form-group">
@@ -569,6 +569,49 @@
     </footer>
 
     <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzRT6BQBteZGPYtOVoYFEzx8K5RNrQihAQsJPBh3E8_U3Ef4yIOffmr7Thm78qUV36IqA/exec";
+
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = this;
+            const formData = new FormData(form);
+
+            const data = {
+            fullName: formData.get("fullName"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            message: formData.get("message")
+            };
+
+            try {
+            const response = await fetch(scriptURL, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                "Content-Type": "application/json"
+                }
+            });
+
+            const result = await response.json();
+
+            if (result.result === "success") {
+                alert("Thank you for your message. We will contact you shortly.");
+                form.reset();
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+            } catch (error) {
+            console.error(error);
+            alert("Failed to send message. Please try again later.");
+            }
+        });
+    </script>
+    
+    
+    
+    
+    <!-- <script>
         // Form submission handling (customize as needed)
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -594,6 +637,6 @@
         document.querySelectorAll('.gallery-item').forEach(item => {
             observer.observe(item);
         });
-    </script>
+    </script> -->
 </body>
 </html>
