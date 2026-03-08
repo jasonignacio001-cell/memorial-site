@@ -522,29 +522,36 @@
             <h2 class="contact-title">Get in Touch</h2>
             <p class="contact-subtitle">We're here to help you find the perfect resting place</p>
             
-            <form class="contact-form" method="POST">
+           <form class="contact-form"
+                action="https://script.google.com/macros/s/AKfycbzRT6BOBteZGPYtOVoYFEzx8K5RNrQihAOsJPBh3E8_U3Ef4yIOffmr7Thm78qUV36IqA/exec"
+                method="POST"
+                target="hidden_iframe"
+                onsubmit="submitted=true;">
+
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="fullName" placeholder="Your Name" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="inquiries@manilamemorialparks.com" required>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
                     <input type="tel" id="phone" name="phone" placeholder="+639123456103">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
                 </div>
-                
+
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
+
+            <iframe name="hidden_iframe" style="display:none;"></iframe>
 
             <div class="contact-info">
                 <div class="contact-detail">
