@@ -568,7 +568,59 @@
         <p>&copy; 2020 Manila Memorial Park Services. All rights reserved.</p>
     </footer>
 
-    <script>
+<script>
+  const scriptURL = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+  document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+
+    const data = {
+      fullName: formData.get("fullName"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message")
+    };
+
+    console.log("Sending data:", data);
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const text = await response.text();
+      console.log("Raw response:", text);
+
+      try {
+        const result = JSON.parse(text);
+        console.log("Parsed response:", result);
+
+        if (result.result === "success") {
+          alert("Message sent successfully.");
+          form.reset();
+        } else {
+          alert("Server returned an error.");
+        }
+      } catch {
+        alert("Response is not valid JSON. Check Apps Script deployment.");
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+      alert("Request failed. Check console.");
+    }
+  });
+</script>
+
+
+
+    <!-- <script>
         const scriptURL = "https://script.google.com/macros/s/AKfycbzRT6BQBteZGPYtOVoYFEzx8K5RNrQihAQsJPBh3E8_U3Ef4yIOffmr7Thm78qUV36IqA/exec";
 
         document.querySelector('.contact-form').addEventListener('submit', async function(e) {
@@ -606,7 +658,7 @@
             alert("Failed to send message. Please try again later.");
             }
         });
-    </script>
+    </script> -->
     
     
     
