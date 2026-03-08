@@ -576,33 +576,19 @@
     </footer>
 
 <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycby8N1XekKT74C5SvZseA2TMyUMbdIJZEJ34Kw-K4uOCALlfzbbxFNfKZTF_BiC__xmwRA/exec";
+  let submitted = false;
 
-  document.querySelector('.contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
+  window.addEventListener("load", function () {
+    const iframe = document.querySelector('iframe[name="hidden_iframe"]');
+    const form = document.querySelector(".contact-form");
 
-    const form = this;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(scriptURL, {
-        method: "POST",
-        body: formData
-      });
-
-      const text = await response.text();
-      console.log("Server response:", text);
-
-      if (text.includes("success")) {
+    iframe.addEventListener("load", function () {
+      if (submitted) {
         alert("Message sent successfully.");
         form.reset();
-      } else {
-        alert("Submission failed. Check console for server response.");
+        submitted = false;
       }
-    } catch (err) {
-      console.error("Fetch error:", err);
-      alert("Request failed. Check console.");
-    }
+    });
   });
 </script>
 
